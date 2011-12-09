@@ -7,26 +7,9 @@
  *
  */
 
-(function($) {
+jQuery(function($) {
+	nexus.init({ api: 'http://naruto.kflorence.wikia-dev.com/api.php', canvas: '#nexusGraph' });
 
-// On DOM ready
-$(function() {
-	var nexusGraph = new NexusGraph(document.getElementById('nexusGraph'));
-
-	var nodes = {
-			"Adjunct": {},
-			"Alcohol": {},
-			"Barley": {}
-		},
-		edges = {
-			"Adjunct": {
-				"Alcohol": {},
-				"Barley": {}
-			}
-		};
-
-	// Set up some nodes for testing
-    nexusGraph.particleSystem.graft({ nodes: nodes, edges: edges });
+	nexus.system.addNode("test");
+	nexus.system.addNode("test2");
 });
-
-})(jQuery);
