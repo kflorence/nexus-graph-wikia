@@ -13,23 +13,20 @@
 $(function() {
 	var nexusGraph = new NexusGraph(document.getElementById('nexusGraph'));
 
+	var nodes = {
+			"Adjunct": {},
+			"Alcohol": {},
+			"Barley": {}
+		},
+		edges = {
+			"Adjunct": {
+				"Alcohol": {},
+				"Barley": {}
+			}
+		};
+
 	// Set up some nodes for testing
-    nexusGraph.particleSystem.graft({
-    	nodes: {
-    		f: {
-    			alone: true, 
-    			mass: .25
-    		}
-    	},
-    	edges: {
-    		a: {
-    			b: {},
-    			c: {},
-    			d: {},
-    			e: {}
-    		}
-    	}
-	});
+    nexusGraph.particleSystem.graft({ nodes: nodes, edges: edges });
 });
 
 })(jQuery);

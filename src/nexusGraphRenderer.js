@@ -28,12 +28,12 @@ NexusGraphRenderer.prototype = {
 
 	// Called repeatedly whenever node positions change and the canvas needs to be redrawn
 	redraw: function() {
-		var cvs = this.canvas,
-			ctx = this.context;
+		var canvas = this.canvas,
+			context = this.context;
 
 		// Blank out the canvas
-        ctx.fillStyle = "white";
-        ctx.fillRect(0, 0, cvs.width, cvs.height);
+        context.fillStyle = "white";
+        context.fillRect(0, 0, canvas.width, canvas.height);
 
 		// Draw the edges
         this.system.eachEdge(function(edge, pt1, pt2) {
@@ -42,12 +42,12 @@ NexusGraphRenderer.prototype = {
 			// pt2:  {x:#, y:#}  target position in screen coords
 
 			// draw a line from pt1 to pt2
-			ctx.strokeStyle = "rgba(0, 0, 0, .333)";
-			ctx.lineWidth = 1;
-			ctx.beginPath();
-			ctx.moveTo(pt1.x, pt1.y);
-			ctx.lineTo(pt2.x, pt2.y);
-			ctx.stroke();
+			context.strokeStyle = "black";
+			context.lineWidth = 1;
+			context.beginPath();
+			context.moveTo(pt1.x, pt1.y);
+			context.lineTo(pt2.x, pt2.y);
+			context.stroke();
 		});
 
 		// Draw the nodes
@@ -56,9 +56,14 @@ NexusGraphRenderer.prototype = {
 			// pt:   {x:#, y:#}  node position in screen coords
 
 			// draw a rectangle centered at pt
-			var w = 10;
-			ctx.fillStyle = (node.data.alone) ? "orange" : "black";
-			ctx.fillRect(pt.x - w / 2, pt.y - w / 2, w, w);
+			var width = context.measureText(node.name).width,
+				x = (pt.x - (width / 2)),
+				y = pt.y;
+
+			context.fillStyle = "black";
+			context.fillRect(x - 10, pt.y - 12, width + 20, width / 2);
+			context.fillStyle = "white";
+			context.fillText(node.name, x, y);
 		});
 	}
 };
